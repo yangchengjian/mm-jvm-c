@@ -175,6 +175,10 @@ target_link_libraries(${PROJECT_NAME}
   ${PROTOBUF_LIBRARIES}
 )
 
+target_compile_options(${PROJECT_NAME}
+  -Wno-error=unusable-partial-specialization
+)
+
 if(LIBTOXCORE_FOUND)
   target_link_libraries(${PROJECT_NAME}
     ${LIBTOXAV_STATIC_LIBRARIES}
