@@ -213,3 +213,24 @@ HANDLE ("SetTyping", SET_TYPING)
     }
   return unhandled ();
 }
+
+HANDLE ("NewGroup", CONFERENCE_NEW)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_NEW);
+    failure_case (CONFERENCE_NEW, INIT);
+    }
+  return unhandled ();
+}
+
+HANDLE ("GetGroupChatId", CONFERENCE_GET_ID)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_GET_ID);
+    failure_case (CONFERENCE_GET_ID, NULL);
+    failure_case (CONFERENCE_GET_ID, NOT_FOUND);
+    }
+  return unhandled ();
+}

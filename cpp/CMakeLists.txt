@@ -116,6 +116,7 @@ add_library(${PROJECT_NAME} SHARED
   src/ToxCore/generated/im_tox_tox4j_impl_jni_ToxCoreJni.h
   src/ToxCore/generated/natives.h
   src/ToxCore/clientinfo.cpp
+  src/ToxCore/conference.cpp
   src/ToxCore/connection.cpp
   src/ToxCore/custom.cpp
   src/ToxCore/debug.cpp

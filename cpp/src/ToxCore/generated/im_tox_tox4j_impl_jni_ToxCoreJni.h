@@ -471,6 +471,22 @@ JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jGetMaxLogSize
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetLogFilter
   (JNIEnv *, jclass, jobjectArray);
 
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxNewGroup
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxNewGroup
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxGetGroupChatId
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGetGroupChatId
+  (JNIEnv *, jclass, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif

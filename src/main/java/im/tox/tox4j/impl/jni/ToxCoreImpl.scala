@@ -261,6 +261,13 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
   override def friendSendLosslessPacket(friendNumber: ToxFriendNumber, data: ToxLosslessPacket): Unit =
     ToxCoreJni.toxFriendSendLosslessPacket(instanceNumber, friendNumber.value, data.value)
 
+  @throws[ToxGroupException]
+  override def newGroup(@NotNull groupName: String): ToxGroupNumber =
+    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxNewGroup(instanceNumber))
+
+  override def getGroupChatId(groupNumber: ToxGroupNumber): ToxGroupChatId =
+    ToxGroupChatId.unsafeFromValue(ToxCoreJni.toxGroupChatId(instanceNumber, groupNumber.value))
+
   def invokeFriendName(friendNumber: ToxFriendNumber, @NotNull name: ToxNickname): Unit =
     ToxCoreJni.invokeFriendName(instanceNumber, friendNumber.value, name.value)
   def invokeFriendStatusMessage(friendNumber: ToxFriendNumber, @NotNull message: Array[Byte]): Unit =

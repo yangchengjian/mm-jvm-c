@@ -9,6 +9,8 @@ bintrayVcsUrl := Some("https://github.com/TokTok/jvm-toxcore-c")
 /******************************************************************************
  * Dependencies
  ******************************************************************************/
+// Local dependencies
+unmanagedBase := baseDirectory.value / "lib"
 
 // Snapshot and linter repository.
 resolvers += Resolver.sonatypeRepo("snapshots")

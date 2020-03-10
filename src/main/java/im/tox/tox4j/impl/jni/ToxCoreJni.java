@@ -79,6 +79,9 @@ public final class ToxCoreJni {
   static native void toxFriendSendLossyPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
   static native void toxFriendSendLosslessPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
 
+  static native int toxNewGroup(int instanceNumber) throws ToxGroupException;
+  static native byte[] toxGroupChatId(int instanceNumber, int groupNumber);
+
   static native void invokeSelfConnectionStatus(int instanceNumber, int connectionStatus);
   static native void invokeFileRecvControl(int instanceNumber, int friendNumber, int fileNumber, int control);
   static native void invokeFileRecv(int instanceNumber, int friendNumber, int fileNumber, int kind, long fileSize, @NotNull byte[] filename);
