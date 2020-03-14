@@ -261,12 +261,21 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
   override def friendSendLosslessPacket(friendNumber: ToxFriendNumber, data: ToxLosslessPacket): Unit =
     ToxCoreJni.toxFriendSendLosslessPacket(instanceNumber, friendNumber.value, data.value)
 
-  @throws[ToxGroupException]
-  override def newGroup(@NotNull groupName: String): ToxGroupNumber =
-    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxNewGroup(instanceNumber))
+  @throws[ToxGroupNewException]
+  override def groupNew(@NotNull groupName: String): ToxGroupNumber =
+    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxGroupNew(instanceNumber))
 
-  override def getGroupChatId(groupNumber: ToxGroupNumber): ToxGroupChatId =
+  @throws[ToxGroupChatIdException]
+  override def groupChatId(groupNumber: ToxGroupNumber): ToxGroupChatId =
     ToxGroupChatId.unsafeFromValue(ToxCoreJni.toxGroupChatId(instanceNumber, groupNumber.value))
+
+  @throws[ToxGroupInviteException]
+  override def groupInvite(friendNumber: ToxFriendNumber, groupNumber: ToxGroupNumber): Unit =
+    ToxCoreJni.toxGroupInvite(instanceNumber, friendNumber.value, groupNumber.value)
+
+  @throws[ToxGroupNumberException]
+  override def groupNumber(groupChatId: ToxGroupChatId): ToxGroupNumber =
+    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxGroupNumber(instanceNumber, groupChatId.value))
 
   def invokeFriendName(friendNumber: ToxFriendNumber, @NotNull name: ToxNickname): Unit =
     ToxCoreJni.invokeFriendName(instanceNumber, friendNumber.value, name.value)

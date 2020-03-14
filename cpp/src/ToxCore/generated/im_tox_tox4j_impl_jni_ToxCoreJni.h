@@ -185,6 +185,60 @@ JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxSelfGetStatus
 
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxSelfSetTyping
+ * Signature: (IIZ)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxSelfSetTyping
+  (JNIEnv *, jclass, jint, jint, jboolean);
+
+/******************************************************************************
+ File
+******************************************************************************/
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFileControl
+ * Signature: (IIII)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileControl
+  (JNIEnv *, jclass, jint, jint, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFileSeek
+ * Signature: (IIIJ)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSeek
+  (JNIEnv *, jclass, jint, jint, jint, jlong);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFileSend
+ * Signature: (IIIJ[B[B)I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSend
+  (JNIEnv *, jclass, jint, jint, jint, jlong, jbyteArray, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFileSendChunk
+ * Signature: (IIIJ[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSendChunk
+  (JNIEnv *, jclass, jint, jint, jint, jlong, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFileGetFileId
+ * Signature: (III)[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileGetFileId
+  (JNIEnv *, jclass, jint, jint, jint);
+
+/******************************************************************************
+ Friend
+******************************************************************************/
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
  * Method:    toxFriendAdd
  * Signature: (I[B[B)I
  */
@@ -241,62 +295,6 @@ JNIEXPORT jintArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxSelfGetFrie
 
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxSelfSetTyping
- * Signature: (IIZ)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxSelfSetTyping
-  (JNIEnv *, jclass, jint, jint, jboolean);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFriendSendMessage
- * Signature: (IIII[B)I
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFriendSendMessage
-  (JNIEnv *, jclass, jint, jint, jint, jint, jbyteArray);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFileControl
- * Signature: (IIII)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileControl
-  (JNIEnv *, jclass, jint, jint, jint, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFileSeek
- * Signature: (IIIJ)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSeek
-  (JNIEnv *, jclass, jint, jint, jint, jlong);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFileSend
- * Signature: (IIIJ[B[B)I
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSend
-  (JNIEnv *, jclass, jint, jint, jint, jlong, jbyteArray, jbyteArray);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFileSendChunk
- * Signature: (IIIJ[B)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileSendChunk
-  (JNIEnv *, jclass, jint, jint, jint, jlong, jbyteArray);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxFileGetFileId
- * Signature: (III)[B
- */
-JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFileGetFileId
-  (JNIEnv *, jclass, jint, jint, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
  * Method:    toxFriendSendLossyPacket
  * Signature: (II[B)V
  */
@@ -311,6 +309,97 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFriendSendLossyP
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFriendSendLosslessPacket
   (JNIEnv *, jclass, jint, jint, jbyteArray);
 
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxFriendSendMessage
+ * Signature: (IIII[B)I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxFriendSendMessage
+  (JNIEnv *, jclass, jint, jint, jint, jint, jbyteArray);
+
+/******************************************************************************
+ tox4j
+******************************************************************************/
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    tox4jLastLog
+ * Signature: ()[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jLastLog
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    tox4jGetCurrentLogSize
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jGetCurrentLogSize
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    tox4jSetMaxLogSize
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetMaxLogSize
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    tox4jGetMaxLogSize
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jGetMaxLogSize
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    tox4jSetLogFilter
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetLogFilter
+  (JNIEnv *, jclass, jobjectArray);
+
+/******************************************************************************
+ Group
+******************************************************************************/
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxGroupNew
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupNew
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxGroupChatId
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupChatId
+  (JNIEnv *, jclass, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxGroupInvite
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupInvite
+  (JNIEnv *, jclass, jint, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxGroupNumber
+ * Signature: (I[B)I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupNumber
+  (JNIEnv *, jclass, jint, jbyteArray);
+
+
+
+/******************************************************************************
+ Invoke
+******************************************************************************/
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
  * Method:    invokeSelfConnectionStatus
@@ -430,62 +519,6 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendTyping
  */
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadReceipt
   (JNIEnv *, jclass, jint, jint, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    tox4jLastLog
- * Signature: ()[B
- */
-JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jLastLog
-  (JNIEnv *, jclass);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    tox4jGetCurrentLogSize
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jGetCurrentLogSize
-  (JNIEnv *, jclass);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    tox4jSetMaxLogSize
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetMaxLogSize
-  (JNIEnv *, jclass, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    tox4jGetMaxLogSize
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jGetMaxLogSize
-  (JNIEnv *, jclass);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    tox4jSetLogFilter
- * Signature: ([Ljava/lang/String;)V
- */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetLogFilter
-  (JNIEnv *, jclass, jobjectArray);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxNewGroup
- * Signature: ([Ljava/lang/String;)V
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxNewGroup
-  (JNIEnv *, jclass, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxGetGroupChatId
- * Signature: ([Ljava/lang/String;)V
- */
-JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGetGroupChatId
-  (JNIEnv *, jclass, jint, jint);
 
 #ifdef __cplusplus
 }

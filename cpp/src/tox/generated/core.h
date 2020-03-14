@@ -6,6 +6,7 @@ CALLBACK (file_recv)
 CALLBACK (file_recv_chunk)
 // im.tox.tox4j.core.callbacks.FileRecvControlCallback#fileRecvControl
 CALLBACK (file_recv_control)
+
 // im.tox.tox4j.core.callbacks.FriendConnectionStatusCallback#friendConnectionStatus
 CALLBACK (friend_connection_status)
 // im.tox.tox4j.core.callbacks.FriendLosslessPacketCallback#friendLosslessPacket
@@ -26,5 +27,9 @@ CALLBACK (friend_status)
 CALLBACK (friend_status_message)
 // im.tox.tox4j.core.callbacks.FriendTypingCallback#friendTyping
 CALLBACK (friend_typing)
+
 // im.tox.tox4j.core.callbacks.SelfConnectionStatusCallback#selfConnectionStatus
 CALLBACK (self_connection_status)
+
+// im.tox.tox4j.core.callbacks.ConferenceInviteCallback#conferenceInvit
+CALLBACK (conference_invite)

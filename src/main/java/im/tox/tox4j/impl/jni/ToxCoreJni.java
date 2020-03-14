@@ -79,8 +79,10 @@ public final class ToxCoreJni {
   static native void toxFriendSendLossyPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
   static native void toxFriendSendLosslessPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
 
-  static native int toxNewGroup(int instanceNumber) throws ToxGroupException;
-  static native byte[] toxGroupChatId(int instanceNumber, int groupNumber);
+  static native int toxGroupNew(int instanceNumber) throws ToxGroupNewException;
+  static native byte[] toxGroupChatId(int instanceNumber, int groupNumber) throws ToxGroupChatIdException;
+  static native void toxGroupInvite(int instanceNumber, int friendNumber, int groupNumber) throws ToxGroupInviteException;
+  static native int toxGroupNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxGroupNumberException;
 
   static native void invokeSelfConnectionStatus(int instanceNumber, int connectionStatus);
   static native void invokeFileRecvControl(int instanceNumber, int friendNumber, int fileNumber, int control);
