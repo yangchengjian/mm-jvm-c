@@ -121,6 +121,11 @@ message FriendLosslessPacket {
   bytes  data                 = 2;
 }
 
+message ConferenceInvite {
+  uint32 conference_number    = 1;
+  uint32 time_delta           = 2;
+}
+
 message CoreEvents {
   repeated SelfConnectionStatus   self_connection_status   =  1;
   repeated FriendName             friend_name              =  2;
@@ -137,4 +142,5 @@ message CoreEvents {
   repeated FileRecvChunk          file_recv_chunk          = 13;
   repeated FriendLossyPacket      friend_lossy_packet      = 14;
   repeated FriendLosslessPacket   friend_lossless_packet   = 15;
+  repeated ConferenceInvite       conference_invite        = 16;
 }

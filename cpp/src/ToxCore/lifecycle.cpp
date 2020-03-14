@@ -189,6 +189,13 @@ tox4j_friend_lossless_packet_cb (uint32_t friend_number, uint8_t const *data, si
   msg->set_data (data, length);
 }
 
+static void
+tox4j_conference_invite_cb (uint32_t conference_number, Events *events)
+{
+  auto msg = events->add_conference_invite ();
+  msg->set_conference_number (conference_number);
+  msg->set_time_delta (0);
+}
 
 static auto
 tox_options_new_unique ()
@@ -608,6 +615,23 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadRec
       {
         assert (tox != nullptr);
         tox4j_friend_read_receipt_cb (friend_number, message_id, &events);
+      }
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    invokeConferenceInvite
+ * Signature: (I[BI[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInvite
+  (JNIEnv *env, jclass, jint instanceNumber, jint conference_number, jint time_delta)
+{
+  return instances.with_instance (env, instanceNumber,
+    [=] (Tox *tox, Events &events)
+      {
+        assert (tox != nullptr);
+        tox4j_conference_invite_cb (conference_number, /*time_delta, */ &events);
       }
   );
 }

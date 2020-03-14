@@ -365,37 +365,35 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_tox4jSetLogFilter
 ******************************************************************************/
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxGroupNew
+ * Method:    toxConferenceNew
  * Signature: ([Ljava/lang/String;)V
  */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupNew
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceNew
   (JNIEnv *, jclass, jint);
 
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxGroupChatId
+ * Method:    toxConferenceNumber
+ * Signature: (I[B)I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceNumber
+  (JNIEnv *, jclass, jint, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceId
  * Signature: ([Ljava/lang/String;)V
  */
-JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupChatId
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceId
   (JNIEnv *, jclass, jint, jint);
 
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxGroupInvite
+ * Method:    toxConferenceInvite
  * Signature: ([Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupInvite
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceInvite
   (JNIEnv *, jclass, jint, jint, jint);
-
-/*
- * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
- * Method:    toxGroupNumber
- * Signature: (I[B)I
- */
-JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxGroupNumber
-  (JNIEnv *, jclass, jint, jbyteArray);
-
-
 
 /******************************************************************************
  Invoke
@@ -518,6 +516,14 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendTyping
  * Signature: (III)V
  */
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadReceipt
+  (JNIEnv *, jclass, jint, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    invokeConferenceInvite
+ * Signature: (I[BI[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInvite
   (JNIEnv *, jclass, jint, jint, jint);
 
 #ifdef __cplusplus

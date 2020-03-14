@@ -261,21 +261,21 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
   override def friendSendLosslessPacket(friendNumber: ToxFriendNumber, data: ToxLosslessPacket): Unit =
     ToxCoreJni.toxFriendSendLosslessPacket(instanceNumber, friendNumber.value, data.value)
 
-  @throws[ToxGroupNewException]
-  override def groupNew(@NotNull groupName: String): ToxGroupNumber =
-    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxGroupNew(instanceNumber))
+  @throws[ToxConferenceNewException]
+  override def conferenceNew(): ToxConferenceNumber =
+    ToxConferenceNumber.unsafeFromInt(ToxCoreJni.toxConferenceNew(instanceNumber))
 
-  @throws[ToxGroupChatIdException]
-  override def groupChatId(groupNumber: ToxGroupNumber): ToxGroupChatId =
-    ToxGroupChatId.unsafeFromValue(ToxCoreJni.toxGroupChatId(instanceNumber, groupNumber.value))
+  @throws[ToxConferenceNumberException]
+  override def conferenceNumber(conferenceId: ToxConferenceId): ToxConferenceNumber =
+    ToxConferenceNumber.unsafeFromInt(ToxCoreJni.toxConferenceNumber(instanceNumber, conferenceId.value))
 
-  @throws[ToxGroupInviteException]
-  override def groupInvite(friendNumber: ToxFriendNumber, groupNumber: ToxGroupNumber): Unit =
-    ToxCoreJni.toxGroupInvite(instanceNumber, friendNumber.value, groupNumber.value)
+  @throws[ToxConferenceIdException]
+  override def conferenceId(conferenceNumber: ToxConferenceNumber): ToxConferenceId =
+    ToxConferenceId.unsafeFromValue(ToxCoreJni.toxConferenceId(instanceNumber, conferenceNumber.value))
 
-  @throws[ToxGroupNumberException]
-  override def groupNumber(groupChatId: ToxGroupChatId): ToxGroupNumber =
-    ToxGroupNumber.unsafeFromInt(ToxCoreJni.toxGroupNumber(instanceNumber, groupChatId.value))
+  @throws[ToxConferenceInviteException]
+  override def conferenceInvite(friendNumber: ToxFriendNumber, conferenceNumber: ToxConferenceNumber): Unit =
+    ToxCoreJni.toxConferenceInvite(instanceNumber, friendNumber.value, conferenceNumber.value)
 
   def invokeFriendName(friendNumber: ToxFriendNumber, @NotNull name: ToxNickname): Unit =
     ToxCoreJni.invokeFriendName(instanceNumber, friendNumber.value, name.value)
@@ -307,5 +307,6 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
     ToxCoreJni.invokeFriendLosslessPacket(instanceNumber, friendNumber.value, data)
   def invokeSelfConnectionStatus(@NotNull connectionStatus: ToxConnection): Unit =
     ToxCoreJni.invokeSelfConnectionStatus(instanceNumber, connectionStatus.ordinal())
-
+  def invokeConferenceInvite(@NotNull conferenceNumber: ToxConferenceNumber, timeDelta: Int): Unit =
+    ToxCoreJni.invokeConferenceInvite(instanceNumber, conferenceNumber.value, timeDelta)
 }

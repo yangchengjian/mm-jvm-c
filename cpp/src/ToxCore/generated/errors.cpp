@@ -214,7 +214,7 @@ HANDLE ("SetTyping", SET_TYPING)
   return unhandled ();
 }
 
-HANDLE ("GroupNew", CONFERENCE_NEW)
+HANDLE ("ConferenceNew", CONFERENCE_NEW)
 {
   switch (error)
     {
@@ -224,7 +224,18 @@ HANDLE ("GroupNew", CONFERENCE_NEW)
   return unhandled ();
 }
 
-HANDLE ("GroupChatId", CONFERENCE_GET_ID)
+HANDLE ("ConferenceNumber", CONFERENCE_BY_ID)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_BY_ID);
+    failure_case (CONFERENCE_BY_ID, NULL);
+    failure_case (CONFERENCE_BY_ID, NOT_FOUND);
+    }
+  return unhandled ();
+}
+
+HANDLE ("ConferenceId", CONFERENCE_GET_ID)
 {
   switch (error)
     {
@@ -234,7 +245,7 @@ HANDLE ("GroupChatId", CONFERENCE_GET_ID)
   return unhandled ();
 }
 
-HANDLE ("GroupInvite", CONFERENCE_INVITE)
+HANDLE ("ConferenceInvite", CONFERENCE_INVITE)
 {
   switch (error)
     {
@@ -242,17 +253,6 @@ HANDLE ("GroupInvite", CONFERENCE_INVITE)
     failure_case (CONFERENCE_INVITE, CONFERENCE_NOT_FOUND);
     failure_case (CONFERENCE_INVITE, FAIL_SEND);
     failure_case (CONFERENCE_INVITE, NO_CONNECTION);
-    }
-  return unhandled ();
-}
-
-HANDLE ("GroupNumber", CONFERENCE_BY_ID)
-{
-  switch (error)
-    {
-    success_case (CONFERENCE_BY_ID);
-    failure_case (CONFERENCE_BY_ID, NULL);
-    failure_case (CONFERENCE_BY_ID, NOT_FOUND);
     }
   return unhandled ();
 }

@@ -208,6 +208,16 @@ object ToxCoreEventDispatch {
     }
   }
 
+  private def dispatchConferenceInvite[S](handler: ToxCoreEventListener[S], conferenceInvite: Seq[ConferenceInvite])(state: S): S = {
+    conferenceInvite.foldLeft(state) {
+      case (state, ConferenceInvite(conferenceNumber, timeDelta)) =>
+        handler.conferenceInvite(
+          ToxConferenceNumber.unsafeFromInt(conferenceNumber),
+          timeDelta
+        )(state)
+    }
+  }
+
   private def dispatchEvents[S](handler: ToxCoreEventListener[S], events: CoreEvents)(state: S): S = {
     (state
       |> dispatchSelfConnectionStatus(handler, events.selfConnectionStatus)
@@ -224,7 +234,8 @@ object ToxCoreEventDispatch {
       |> dispatchFileRecv(handler, events.fileRecv)
       |> dispatchFileRecvChunk(handler, events.fileRecvChunk)
       |> dispatchFriendLossyPacket(handler, events.friendLossyPacket)
-      |> dispatchFriendLosslessPacket(handler, events.friendLosslessPacket))
+      |> dispatchFriendLosslessPacket(handler, events.friendLosslessPacket)
+      |> dispatchConferenceInvite(handler, events.conferenceInvite))
   }
 
   @SuppressWarnings(Array(

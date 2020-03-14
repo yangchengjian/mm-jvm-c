@@ -79,10 +79,11 @@ public final class ToxCoreJni {
   static native void toxFriendSendLossyPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
   static native void toxFriendSendLosslessPacket(int instanceNumber, int friendNumber, @NotNull byte[] data) throws ToxFriendCustomPacketException;
 
-  static native int toxGroupNew(int instanceNumber) throws ToxGroupNewException;
-  static native byte[] toxGroupChatId(int instanceNumber, int groupNumber) throws ToxGroupChatIdException;
-  static native void toxGroupInvite(int instanceNumber, int friendNumber, int groupNumber) throws ToxGroupInviteException;
-  static native int toxGroupNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxGroupNumberException;
+  static native int toxConferenceNew(int instanceNumber) throws ToxConferenceNewException;
+  static native int toxConferenceNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxConferenceNumberException;
+  static native byte[] toxConferenceId(int instanceNumber, int conferenceNumber) throws ToxConferenceIdException;
+  static native void toxConferenceInvite(int instanceNumber, int friendNumber, int conferenceNumber) throws ToxConferenceInviteException;
+
 
   static native void invokeSelfConnectionStatus(int instanceNumber, int connectionStatus);
   static native void invokeFileRecvControl(int instanceNumber, int friendNumber, int fileNumber, int control);
@@ -99,6 +100,7 @@ public final class ToxCoreJni {
   static native void invokeFriendStatusMessage(int instanceNumber, int friendNumber, @NotNull byte[] message);
   static native void invokeFriendTyping(int instanceNumber, int friendNumber, boolean isTyping);
   static native void invokeFriendReadReceipt(int instanceNumber, int friendNumber, int messageId);
+  static native void invokeConferenceInvite(int instanceNumber, int friendNumber, int timeDelta);
 
   static native byte[] tox4jLastLog();
   static native int tox4jGetCurrentLogSize();
