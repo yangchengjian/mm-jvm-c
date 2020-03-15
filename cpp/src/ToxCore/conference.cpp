@@ -63,3 +63,35 @@ TOX_METHOD (void, ConferenceInvite,
     tox_conference_invite, friendNumber, conferenceNumber
   );
 }
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceJoin
+ * Signature: (IIII[B)I
+ */
+TOX_METHOD (jint, ConferenceJoin,
+  jint instanceNumber, jint friendNumber, jbyteArray cookie)
+{
+  auto cookie_array = fromJavaArray (env, cookie);
+
+  return instances.with_instance_err (env, instanceNumber,
+    identity,
+    tox_conference_join, friendNumber, cookie_array.data (), cookie_array.size ()
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceSendMessage
+ * Signature: (IIII[B)I
+ */
+TOX_METHOD (bool, ConferenceSendMessage,
+  jint instanceNumber, jint conferenceNumber, jint messageType, jint timeDelta, jbyteArray message)
+{
+  auto message_array = fromJavaArray (env, message);
+
+  return instances.with_instance_err (env, instanceNumber,
+    identity,
+    tox_conference_send_message, conferenceNumber, Enum::valueOf<TOX_MESSAGE_TYPE> (env, messageType), message_array.data (), message_array.size ()
+  );
+}

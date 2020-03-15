@@ -210,6 +210,28 @@ tox4j_conference_invite_cb (uint32_t friend_number, TOX_CONFERENCE_TYPE type, /*
   msg->set_cookie (cookie, length);
 }
 
+static void
+tox4j_conference_message_cb (uint32_t conference_number, uint32_t peer_number, TOX_MESSAGE_TYPE type, /*uint32_t time_delta, */ uint8_t const *message, size_t length, Events *events)
+{
+  auto msg = events->add_conference_message ();
+  msg->set_conference_number (conference_number);
+  msg->set_peer_number (peer_number);
+
+  using proto::MessageType;
+  switch (type)
+    {
+    case TOX_MESSAGE_TYPE_NORMAL:
+      msg->set_type (MessageType::NORMAL);
+      break;
+    case TOX_MESSAGE_TYPE_ACTION:
+      msg->set_type (MessageType::ACTION);
+      break;
+    }
+
+  msg->set_time_delta (0);
+  msg->set_message (message, length);
+}
+
 static auto
 tox_options_new_unique ()
 {
@@ -646,6 +668,24 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInv
         assert (tox != nullptr);
         auto cookieArray = fromJavaArray (env, cookie);
         tox4j_conference_invite_cb (friend_number, Enum::valueOf<TOX_CONFERENCE_TYPE> (env, type), /*time_delta, */ cookieArray.data (), cookieArray.size (), &events);
+      }
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    invokeConferenceMessage
+ * Signature: (IIII[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceMessage
+  (JNIEnv *env, jclass, jint instanceNumber, jint conference_number, jint peer_number, jint type, jint time_delta, jbyteArray message)
+{
+  return instances.with_instance (env, instanceNumber,
+    [=] (Tox *tox, Events &events)
+      {
+        assert (tox != nullptr);
+        auto messageArray = fromJavaArray (env, message);
+        tox4j_conference_message_cb (conference_number, peer_number, Enum::valueOf<TOX_MESSAGE_TYPE> (env, type), /*time_delta, */ messageArray.data (), messageArray.size (), &events);
       }
   );
 }

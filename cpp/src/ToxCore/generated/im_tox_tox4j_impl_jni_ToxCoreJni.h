@@ -395,6 +395,22 @@ JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConference
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceInvite
   (JNIEnv *, jclass, jint, jint, jint);
 
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceJoin
+ * Signature: (IIII[B)I
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceJoin
+  (JNIEnv *, jclass, jint, jint, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceSendMessage
+ * Signature: (IIII[B)I
+ */
+JNIEXPORT bool JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceSendMessage
+  (JNIEnv *, jclass, jint, jint, jint, jint, jbyteArray);
+
 /******************************************************************************
  Invoke
 ******************************************************************************/
@@ -525,6 +541,15 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadRec
  */
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInvite
   (JNIEnv *, jclass, jint, jint, jint, jint, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    invokeConferenceMessage
+ * Signature: (IIII[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceMessage
+  (JNIEnv *, jclass, jint, jint, jint, jint, jint, jbyteArray);
+
 #ifdef __cplusplus
 }
 #endif

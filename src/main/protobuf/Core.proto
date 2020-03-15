@@ -134,6 +134,14 @@ message ConferenceInvite {
   bytes cookie                = 4;
 }
 
+message ConferenceMessage {
+  uint32 conference_number    = 1;
+  uint32 peer_number    = 2;
+  MessageType.Type type       = 3;
+  uint32 time_delta           = 4;
+  bytes message               = 5;
+}
+
 message CoreEvents {
   repeated SelfConnectionStatus   self_connection_status   =  1;
   repeated FriendName             friend_name              =  2;
@@ -151,4 +159,5 @@ message CoreEvents {
   repeated FriendLossyPacket      friend_lossy_packet      = 14;
   repeated FriendLosslessPacket   friend_lossless_packet   = 15;
   repeated ConferenceInvite       conference_invite        = 16;
+  repeated ConferenceMessage      conference_message       = 17;
 }

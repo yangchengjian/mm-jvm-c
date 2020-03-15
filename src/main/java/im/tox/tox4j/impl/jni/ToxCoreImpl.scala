@@ -277,6 +277,14 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
   override def conferenceInvite(friendNumber: ToxFriendNumber, conferenceNumber: ToxConferenceNumber): Unit =
     ToxCoreJni.toxConferenceInvite(instanceNumber, friendNumber.value, conferenceNumber.value)
 
+  @throws[ToxConferenceJoinException]
+  override def conferenceJoin(friendNumber: ToxFriendNumber, cookie: ToxConferenceCookie): ToxConferenceNumber =
+    ToxConferenceNumber.unsafeFromInt(ToxCoreJni.toxConferenceJoin(instanceNumber, friendNumber.value, cookie.value))
+
+  @throws[ToxConferenceSendMessageException]
+  override def conferenceSendMessage(conferenceNumber: ToxConferenceNumber, messageType: ToxMessageType, timeDelta: Int, message: ToxConferenceMessage): Boolean =
+    ToxCoreJni.toxConferenceSendMessage(instanceNumber, conferenceNumber.value, messageType.ordinal, timeDelta, message.value)
+
   def invokeFriendName(friendNumber: ToxFriendNumber, @NotNull name: ToxNickname): Unit =
     ToxCoreJni.invokeFriendName(instanceNumber, friendNumber.value, name.value)
   def invokeFriendStatusMessage(friendNumber: ToxFriendNumber, @NotNull message: Array[Byte]): Unit =
@@ -309,4 +317,6 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
     ToxCoreJni.invokeSelfConnectionStatus(instanceNumber, connectionStatus.ordinal())
   def invokeConferenceInvite(friendNumber: ToxFriendNumber, @NotNull conferenceType: ToxConferenceType, timeDelta: Int, @NotNull cookie: Array[Byte]): Unit =
     ToxCoreJni.invokeConferenceInvite(instanceNumber, friendNumber.value, conferenceType.ordinal(), timeDelta, cookie)
+  def invokeConferenceMessage(conferenceNumber: ToxConferenceNumber, peerNumber: ToxPeerNumber, @NotNull messageType: ToxMessageType, timeDelta: Int, @NotNull message: Array[Byte]): Unit =
+    ToxCoreJni.invokeConferenceMessage(instanceNumber, conferenceNumber.value, peerNumber.value, messageType.ordinal(), timeDelta, message)
 }

@@ -256,3 +256,31 @@ HANDLE ("ConferenceInvite", CONFERENCE_INVITE)
     }
   return unhandled ();
 }
+
+HANDLE ("ConferenceJoin", CONFERENCE_JOIN)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_JOIN);
+    failure_case (CONFERENCE_JOIN, INVALID_LENGTH);
+    failure_case (CONFERENCE_JOIN, WRONG_TYPE);
+    failure_case (CONFERENCE_JOIN, FRIEND_NOT_FOUND);
+    failure_case (CONFERENCE_JOIN, DUPLICATE);
+    failure_case (CONFERENCE_JOIN, INIT_FAIL);
+    failure_case (CONFERENCE_JOIN, FAIL_SEND);
+    }
+  return unhandled ();
+}
+
+HANDLE ("ConferenceSendMessage", CONFERENCE_SEND_MESSAGE)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_SEND_MESSAGE);
+    failure_case (CONFERENCE_SEND_MESSAGE, CONFERENCE_NOT_FOUND);
+    failure_case (CONFERENCE_SEND_MESSAGE, TOO_LONG);
+    failure_case (CONFERENCE_SEND_MESSAGE, NO_CONNECTION);
+    failure_case (CONFERENCE_SEND_MESSAGE, FAIL_SEND);
+    }
+  return unhandled ();
+}

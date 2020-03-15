@@ -38,6 +38,7 @@ namespace tox
   COMPAT_CB (friend_read_receipt)
   COMPAT_CB (friend_status)
   COMPAT_CB (conference_invite)
+  COMPAT_CB (conference_message)
 
 #undef COMPAT_CB
 

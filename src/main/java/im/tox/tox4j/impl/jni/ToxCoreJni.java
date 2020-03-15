@@ -83,7 +83,8 @@ public final class ToxCoreJni {
   static native int toxConferenceNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxConferenceNumberException;
   static native byte[] toxConferenceId(int instanceNumber, int conferenceNumber) throws ToxConferenceIdException;
   static native void toxConferenceInvite(int instanceNumber, int friendNumber, int conferenceNumber) throws ToxConferenceInviteException;
-
+  static native int toxConferenceJoin(int instanceNumber, int friendNumber, @NotNull byte[] cookie) throws ToxConferenceJoinException;
+  static native boolean toxConferenceSendMessage(int instanceNumber, int conferenceNumber, int type, int timeDelta, @NotNull byte[] message) throws ToxConferenceSendMessageException;
 
   static native void invokeSelfConnectionStatus(int instanceNumber, int connectionStatus);
   static native void invokeFileRecvControl(int instanceNumber, int friendNumber, int fileNumber, int control);
@@ -101,6 +102,7 @@ public final class ToxCoreJni {
   static native void invokeFriendTyping(int instanceNumber, int friendNumber, boolean isTyping);
   static native void invokeFriendReadReceipt(int instanceNumber, int friendNumber, int messageId);
   static native void invokeConferenceInvite(int instanceNumber, int friendNumber, int type, int timeDelta, @NotNull byte[] cookie);
+  static native void invokeConferenceMessage(int instanceNumber, int conferenceNumber, int peer_number, int type, int timeDelta, @NotNull byte[] message);
 
   static native byte[] tox4jLastLog();
   static native int tox4jGetCurrentLogSize();

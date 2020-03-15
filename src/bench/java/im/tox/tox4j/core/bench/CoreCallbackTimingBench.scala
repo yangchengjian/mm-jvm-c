@@ -18,6 +18,7 @@ final class CoreCallbackTimingBench extends TimingReport {
   private val nickname = ToxNickname.fromValue(Array.ofDim[Byte](ToxNickname.MaxSize)).toOption.get
   private val data = Array.ofDim[Byte](ToxCoreConstants.MaxCustomPacketSize)
   private val conferenceNumber = ToxConferenceNumber.fromInt(1).get
+  private val peerNumber = ToxPeerNumber.fromInt(1).get
 
   def invokePerformance(method: String, f: ToxCoreImpl => Unit): Unit = {
     performance of method in {
@@ -48,6 +49,7 @@ final class CoreCallbackTimingBench extends TimingReport {
     tox.invokeFriendTyping(friendNumber, isTyping = true)
     tox.invokeSelfConnectionStatus(ToxConnection.TCP)
     tox.invokeConferenceInvite(conferenceNumber, 1)
+    tox.invokeConferenceMessage(conferenceNumber, peerNumber, ToxMessageType.NORMAL, 2, data)
   }
 
   timing.of[ToxCore] {
@@ -105,7 +107,7 @@ final class CoreCallbackTimingBench extends TimingReport {
     invokePerformance("invokeFriendTyping", _.invokeFriendTyping(friendNumber, isTyping = true))
     invokePerformance("invokeSelfConnectionStatus", _.invokeSelfConnectionStatus(ToxConnection.TCP))
     invokePerformance("invokeConferenceInvite", _.invokeConferenceInvite(conferenceNumber, 1))
-
+    invokePerformance("invokeConferenceMessage", _.invokeConferenceMessage(conferenceNumber, peerNumber, ToxMessageType.NORMAL, 2, data))
   }
 
 }
