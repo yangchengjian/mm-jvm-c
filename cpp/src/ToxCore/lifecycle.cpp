@@ -190,11 +190,24 @@ tox4j_friend_lossless_packet_cb (uint32_t friend_number, uint8_t const *data, si
 }
 
 static void
-tox4j_conference_invite_cb (uint32_t conference_number, Events *events)
+tox4j_conference_invite_cb (uint32_t friend_number, TOX_CONFERENCE_TYPE type, /*uint32_t time_delta, */ uint8_t const *cookie, size_t length, Events *events)
 {
   auto msg = events->add_conference_invite ();
-  msg->set_conference_number (conference_number);
+  msg->set_friend_number (friend_number);
+
+  using proto::ConferenceType;
+  switch (type)
+    {
+    case TOX_CONFERENCE_TYPE_TEXT:
+      msg->set_type (ConferenceType::TEXT);
+      break;
+    case TOX_CONFERENCE_TYPE_AV:
+      msg->set_type (ConferenceType::AV);
+      break;
+    }
+
   msg->set_time_delta (0);
+  msg->set_cookie (cookie, length);
 }
 
 static auto
@@ -622,16 +635,17 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadRec
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
  * Method:    invokeConferenceInvite
- * Signature: (I[BI[B)V
+ * Signature: (IIII[B)V
  */
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInvite
-  (JNIEnv *env, jclass, jint instanceNumber, jint conference_number, jint time_delta)
+  (JNIEnv *env, jclass, jint instanceNumber, jint friend_number, jint type, jint time_delta, jbyteArray cookie)
 {
   return instances.with_instance (env, instanceNumber,
     [=] (Tox *tox, Events &events)
       {
         assert (tox != nullptr);
-        tox4j_conference_invite_cb (conference_number, /*time_delta, */ &events);
+        auto cookieArray = fromJavaArray (env, cookie);
+        tox4j_conference_invite_cb (friend_number, Enum::valueOf<TOX_CONFERENCE_TYPE> (env, type), /*time_delta, */ cookieArray.data (), cookieArray.size (), &events);
       }
   );
 }

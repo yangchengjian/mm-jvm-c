@@ -3,7 +3,7 @@ package im.tox.tox4j.impl.jni
 import im.tox.tox4j.OptimisedIdOps._
 import im.tox.tox4j.core.callbacks.ToxCoreEventListener
 import im.tox.tox4j.core.data._
-import im.tox.tox4j.core.enums.{ ToxConnection, ToxFileControl, ToxMessageType, ToxUserStatus }
+import im.tox.tox4j.core.enums.{ ToxConferenceType, ToxConnection, ToxFileControl, ToxMessageType, ToxUserStatus }
 import im.tox.tox4j.core.proto._
 import org.jetbrains.annotations.Nullable
 
@@ -45,6 +45,13 @@ object ToxCoreEventDispatch {
     messageType match {
       case MessageType.Type.NORMAL => ToxMessageType.NORMAL
       case MessageType.Type.ACTION => ToxMessageType.ACTION
+    }
+  }
+
+  def convert(conferenceType: ConferenceType.Type): ToxConferenceType = {
+    conferenceType match {
+      case ConferenceType.Type.TEXT => ToxConferenceType.TEXT
+      case ConferenceType.Type.AV   => ToxConferenceType.AV
     }
   }
 
@@ -210,10 +217,12 @@ object ToxCoreEventDispatch {
 
   private def dispatchConferenceInvite[S](handler: ToxCoreEventListener[S], conferenceInvite: Seq[ConferenceInvite])(state: S): S = {
     conferenceInvite.foldLeft(state) {
-      case (state, ConferenceInvite(conferenceNumber, timeDelta)) =>
+      case (state, ConferenceInvite(friendNumber, conferenceType, timeDelta, cookie)) =>
         handler.conferenceInvite(
-          ToxConferenceNumber.unsafeFromInt(conferenceNumber),
-          timeDelta
+          ToxFriendNumber.unsafeFromInt(friendNumber),
+          convert(conferenceType),
+          timeDelta,
+          ToxConferenceCookie.unsafeFromValue(cookie.toByteArray)
         )(state)
     }
   }

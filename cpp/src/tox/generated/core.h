@@ -28,3 +28,5 @@ CALLBACK (friend_status_message)
 CALLBACK (friend_typing)
 // im.tox.tox4j.core.callbacks.SelfConnectionStatusCallback#selfConnectionStatus
 CALLBACK (self_connection_status)
+// im.tox.tox4j.core.callbacks.ConferenceInviteCallback#conferenceInvite
+CALLBACK (conference_invite)

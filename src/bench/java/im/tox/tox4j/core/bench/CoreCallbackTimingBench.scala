@@ -3,7 +3,7 @@ package im.tox.tox4j.core.bench
 import im.tox.tox4j.bench.TimingReport
 import im.tox.tox4j.bench.ToxBenchBase._
 import im.tox.tox4j.core.callbacks.ToxCoreEventAdapter
-import im.tox.tox4j.core.data.{ ToxFriendNumber, ToxNickname, ToxPublicKey }
+import im.tox.tox4j.core.data.{ ToxConferenceNumber, ToxFriendNumber, ToxNickname, ToxPublicKey }
 import im.tox.tox4j.core.enums.{ ToxConnection, ToxFileControl, ToxMessageType, ToxUserStatus }
 import im.tox.tox4j.core.{ ToxCore, ToxCoreConstants }
 import im.tox.tox4j.impl.jni.ToxCoreImpl
@@ -17,6 +17,7 @@ final class CoreCallbackTimingBench extends TimingReport {
   private val publicKey = ToxPublicKey.fromValue(Array.ofDim[Byte](ToxCoreConstants.PublicKeySize)).toOption.get
   private val nickname = ToxNickname.fromValue(Array.ofDim[Byte](ToxNickname.MaxSize)).toOption.get
   private val data = Array.ofDim[Byte](ToxCoreConstants.MaxCustomPacketSize)
+  private val conferenceNumber = ToxConferenceNumber.fromInt(1).get
 
   def invokePerformance(method: String, f: ToxCoreImpl => Unit): Unit = {
     performance of method in {
@@ -46,6 +47,7 @@ final class CoreCallbackTimingBench extends TimingReport {
     tox.invokeFriendStatusMessage(friendNumber, data)
     tox.invokeFriendTyping(friendNumber, isTyping = true)
     tox.invokeSelfConnectionStatus(ToxConnection.TCP)
+    tox.invokeConferenceInvite(conferenceNumber, 1)
   }
 
   timing.of[ToxCore] {
@@ -102,6 +104,7 @@ final class CoreCallbackTimingBench extends TimingReport {
     invokePerformance("invokeFriendStatusMessage", _.invokeFriendStatusMessage(friendNumber, data))
     invokePerformance("invokeFriendTyping", _.invokeFriendTyping(friendNumber, isTyping = true))
     invokePerformance("invokeSelfConnectionStatus", _.invokeSelfConnectionStatus(ToxConnection.TCP))
+    invokePerformance("invokeConferenceInvite", _.invokeConferenceInvite(conferenceNumber, 1))
 
   }
 

@@ -524,8 +524,7 @@ JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeFriendReadRec
  * Signature: (I[BI[B)V
  */
 JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_invokeConferenceInvite
-  (JNIEnv *, jclass, jint, jint, jint);
-
+  (JNIEnv *, jclass, jint, jint, jint, jint, jbyteArray);
 #ifdef __cplusplus
 }
 #endif

@@ -230,3 +230,39 @@ print_arg<TOX_USER_STATUS> (protolog::Value &value, TOX_USER_STATUS const &arg)
     }
   value.set_v_string ("(TOX_USER_STATUS)" + std::to_string (arg));
 }
+
+template<>
+jint
+Enum::ordinal<TOX_CONFERENCE_TYPE> (JNIEnv *env, TOX_CONFERENCE_TYPE valueOf)
+{
+  switch (valueOf)
+    {
+    case TOX_CONFERENCE_TYPE_TEXT: return 0;
+    case TOX_CONFERENCE_TYPE_AV: return 1;
+    }
+  tox4j_fatal ("Invalid enumerator from toxcore");
+}
+
+template<>
+TOX_CONFERENCE_TYPE
+Enum::valueOf<TOX_CONFERENCE_TYPE> (JNIEnv *env, jint ordinal)
+{
+  switch (ordinal)
+    {
+    case 0: return TOX_CONFERENCE_TYPE_TEXT;
+    case 1: return TOX_CONFERENCE_TYPE_AV;
+    }
+  tox4j_fatal ("Invalid enumerator from Java");
+}
+
+template<>
+void
+print_arg<TOX_CONFERENCE_TYPE> (protolog::Value &value, TOX_CONFERENCE_TYPE const &arg)
+{
+  switch (arg)
+    {
+    case TOX_CONFERENCE_TYPE_TEXT: value.set_v_string ("TOX_CONFERENCE_TYPE_TEXT"); return;
+    case TOX_CONFERENCE_TYPE_AV: value.set_v_string ("TOX_CONFERENCE_TYPE_AV"); return;
+    }
+  value.set_v_string ("(TOX_CONFERENCE_TYPE)" + std::to_string (arg));
+}

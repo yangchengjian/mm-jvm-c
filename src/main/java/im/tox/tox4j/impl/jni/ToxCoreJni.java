@@ -100,7 +100,7 @@ public final class ToxCoreJni {
   static native void invokeFriendStatusMessage(int instanceNumber, int friendNumber, @NotNull byte[] message);
   static native void invokeFriendTyping(int instanceNumber, int friendNumber, boolean isTyping);
   static native void invokeFriendReadReceipt(int instanceNumber, int friendNumber, int messageId);
-  static native void invokeConferenceInvite(int instanceNumber, int friendNumber, int timeDelta);
+  static native void invokeConferenceInvite(int instanceNumber, int friendNumber, int type, int timeDelta, @NotNull byte[] cookie);
 
   static native byte[] tox4jLastLog();
   static native int tox4jGetCurrentLogSize();

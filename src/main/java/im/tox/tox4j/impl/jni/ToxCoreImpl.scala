@@ -5,7 +5,7 @@ import im.tox.core.network.Port
 import im.tox.tox4j.core._
 import im.tox.tox4j.core.callbacks._
 import im.tox.tox4j.core.data._
-import im.tox.tox4j.core.enums.{ ToxConnection, ToxFileControl, ToxMessageType, ToxUserStatus }
+import im.tox.tox4j.core.enums.{ ToxConferenceType, ToxConnection, ToxFileControl, ToxMessageType, ToxUserStatus }
 import im.tox.tox4j.core.exceptions._
 import im.tox.tox4j.core.options.ToxOptions
 import im.tox.tox4j.impl.jni.ToxCoreImpl.logger
@@ -307,6 +307,6 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
     ToxCoreJni.invokeFriendLosslessPacket(instanceNumber, friendNumber.value, data)
   def invokeSelfConnectionStatus(@NotNull connectionStatus: ToxConnection): Unit =
     ToxCoreJni.invokeSelfConnectionStatus(instanceNumber, connectionStatus.ordinal())
-  def invokeConferenceInvite(@NotNull conferenceNumber: ToxConferenceNumber, timeDelta: Int): Unit =
-    ToxCoreJni.invokeConferenceInvite(instanceNumber, conferenceNumber.value, timeDelta)
+  def invokeConferenceInvite(friendNumber: ToxFriendNumber, @NotNull conferenceType: ToxConferenceType, timeDelta: Int, @NotNull cookie: Array[Byte]): Unit =
+    ToxCoreJni.invokeConferenceInvite(instanceNumber, friendNumber.value, conferenceType.ordinal(), timeDelta, cookie)
 }

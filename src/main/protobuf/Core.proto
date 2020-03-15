@@ -34,6 +34,12 @@ message FileControl {
   }
 }
 
+message ConferenceType {
+  enum Type {
+    TEXT  = 0;
+    AV    = 1;
+  }
+}
 
 
 message SelfConnectionStatus {
@@ -122,8 +128,10 @@ message FriendLosslessPacket {
 }
 
 message ConferenceInvite {
-  uint32 conference_number    = 1;
-  uint32 time_delta           = 2;
+  uint32 friend_number        = 1;
+  ConferenceType.Type type    = 2;
+  uint32 time_delta           = 3;
+  bytes cookie                = 4;
 }
 
 message CoreEvents {
