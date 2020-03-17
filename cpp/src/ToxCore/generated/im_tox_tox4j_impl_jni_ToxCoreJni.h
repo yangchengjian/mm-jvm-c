@@ -389,6 +389,30 @@ JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConference
 
 /*
  * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceSetTitle
+ * Signature: (I[B)V
+ */
+JNIEXPORT void JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceSetTitle
+  (JNIEnv *, jclass, jint, jint, jbyteArray);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceGetTitle
+ * Signature: (II)[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceGetTitle
+  (JNIEnv *, jclass, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
+ * Method:    toxConferenceGetTitleSize
+ * Signature: (II)[B
+ */
+JNIEXPORT jint JNICALL Java_im_tox_tox4j_impl_jni_ToxCoreJni_toxConferenceGetTitleSize
+  (JNIEnv *, jclass, jint, jint);
+
+/*
+ * Class:     im_tox_tox4j_impl_jni_ToxCoreJni
  * Method:    toxConferenceInvite
  * Signature: ([Ljava/lang/String;)V
  */

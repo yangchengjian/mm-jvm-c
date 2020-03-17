@@ -82,6 +82,10 @@ public final class ToxCoreJni {
   static native int toxConferenceNew(int instanceNumber) throws ToxConferenceNewException;
   static native int toxConferenceNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxConferenceNumberException;
   static native byte[] toxConferenceId(int instanceNumber, int conferenceNumber) throws ToxConferenceIdException;
+  static native void toxConferenceSetTitle(int instanceNumber, int conferenceNumber, byte[] title) throws ToxConferenceTitleException;
+  @NotNull
+  static native byte[] toxConferenceGetTitle(int instanceNumber, int conferenceNumber) throws ToxConferenceTitleException;
+  static native int toxConferenceGetTitleSize(int instanceNumber, int conferenceNumber) throws ToxConferenceTitleException;
   static native void toxConferenceInvite(int instanceNumber, int friendNumber, int conferenceNumber) throws ToxConferenceInviteException;
   static native int toxConferenceJoin(int instanceNumber, int friendNumber, @NotNull byte[] cookie) throws ToxConferenceJoinException;
   static native boolean toxConferenceSendMessage(int instanceNumber, int conferenceNumber, int type, int timeDelta, @NotNull byte[] message) throws ToxConferenceSendMessageException;

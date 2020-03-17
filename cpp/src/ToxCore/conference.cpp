@@ -53,6 +53,51 @@ TOX_METHOD (jbyteArray, ConferenceId,
 
 /*
  * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceSetTitle
+ * Signature: (I[B)V
+ */
+TOX_METHOD (void, ConferenceSetTitle,
+  jint instanceNumber, jint conference_number, jbyteArray title)
+{
+  auto title_array = fromJavaArray (env, title);
+  return instances.with_instance_ign (env, instanceNumber,
+    tox_conference_set_title, conference_number, title_array.data (), title_array.size ());
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceGetTitle
+ * Signature: (II)[B
+ */
+TOX_METHOD (jbyteArray, ConferenceGetTitle,
+  jint instanceNumber, jint conferenceNumber)
+{
+  uint8_t title[TOX_MAX_NAME_LENGTH];
+  return instances.with_instance_err (env, instanceNumber,
+    [&] (bool)
+      {
+        return toJavaArray (env, title);
+      },
+    tox_conference_get_title, conferenceNumber, title
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceGetTitleSize
+ * Signature: (IIII[B)I
+ */
+TOX_METHOD (jint, ConferenceGetTitleSize,
+  jint instanceNumber, jint conferenceNumber)
+{
+  return instances.with_instance_err (env, instanceNumber,
+    identity,
+    tox_conference_get_title_size, conferenceNumber
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
  * Method:    toxConferenceInvite
  * Signature: (I[B[B)I
  */

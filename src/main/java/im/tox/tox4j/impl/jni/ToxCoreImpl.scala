@@ -273,6 +273,20 @@ final class ToxCoreImpl(@NotNull val options: ToxOptions) extends ToxCore {
   override def conferenceId(conferenceNumber: ToxConferenceNumber): ToxConferenceId =
     ToxConferenceId.unsafeFromValue(ToxCoreJni.toxConferenceId(instanceNumber, conferenceNumber.value))
 
+  @throws[ToxConferenceTitleException]
+  override def conferenceSetTitle(conferenceNumber: ToxConferenceNumber, title: ToxConferenceTitle): Unit = {
+    ToxCoreImpl.checkInfoNotNull(title.value)
+    ToxCoreJni.toxConferenceSetTitle(instanceNumber, conferenceNumber.value, title.value)
+  }
+
+  @throws[ToxConferenceTitleException]
+  override def conferenceGetTitle(conferenceNumber: ToxConferenceNumber): ToxConferenceTitle =
+    ToxConferenceTitle.unsafeFromValue(ToxCoreJni.toxConferenceGetTitle(instanceNumber, conferenceNumber.value))
+
+  @throws[ToxConferenceTitleException]
+  override def conferenceGetTitleSize(conferenceNumber: ToxConferenceNumber): Int =
+    ToxCoreJni.toxConferenceGetTitleSize(instanceNumber, conferenceNumber.value)
+
   @throws[ToxConferenceInviteException]
   override def conferenceInvite(friendNumber: ToxFriendNumber, conferenceNumber: ToxConferenceNumber): Unit =
     ToxCoreJni.toxConferenceInvite(instanceNumber, friendNumber.value, conferenceNumber.value)

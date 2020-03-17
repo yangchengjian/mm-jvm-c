@@ -245,6 +245,18 @@ HANDLE ("ConferenceId", CONFERENCE_GET_ID)
   return unhandled ();
 }
 
+HANDLE ("ConferenceTitle", CONFERENCE_TITLE)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_TITLE);
+    failure_case (CONFERENCE_TITLE, CONFERENCE_NOT_FOUND);
+    failure_case (CONFERENCE_TITLE, INVALID_LENGTH);
+    failure_case (CONFERENCE_TITLE, FAIL_SEND);
+    }
+  return unhandled ();
+}
+
 HANDLE ("ConferenceInvite", CONFERENCE_INVITE)
 {
   switch (error)
