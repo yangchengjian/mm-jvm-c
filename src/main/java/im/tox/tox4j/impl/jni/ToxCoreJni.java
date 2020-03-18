@@ -83,12 +83,17 @@ public final class ToxCoreJni {
   static native int toxConferenceNumber(int instanceNumber, @NotNull byte[] conferenceId) throws ToxConferenceNumberException;
   static native byte[] toxConferenceId(int instanceNumber, int conferenceNumber) throws ToxConferenceIdException;
   static native void toxConferenceSetTitle(int instanceNumber, int conferenceNumber, byte[] title) throws ToxConferenceTitleException;
-  @NotNull
+
   static native byte[] toxConferenceGetTitle(int instanceNumber, int conferenceNumber) throws ToxConferenceTitleException;
   static native int toxConferenceGetTitleSize(int instanceNumber, int conferenceNumber) throws ToxConferenceTitleException;
+
+  static native byte[] toxConferencePeerGetName(int instanceNumber, int conferenceNumber, int peerNumber) throws ToxConferencePeerQueryException;
+  static native int toxConferencePeerGetNameSize(int instanceNumber, int conferenceNumber, int peerNumber) throws ToxConferencePeerQueryException;
+  static native int toxConferencePeerCount(int instanceNumber, int conferenceNumber) throws ToxConferencePeerQueryException;
+
   static native void toxConferenceInvite(int instanceNumber, int friendNumber, int conferenceNumber) throws ToxConferenceInviteException;
-  static native int toxConferenceJoin(int instanceNumber, int friendNumber, @NotNull byte[] cookie) throws ToxConferenceJoinException;
-  static native boolean toxConferenceSendMessage(int instanceNumber, int conferenceNumber, int type, int timeDelta, @NotNull byte[] message) throws ToxConferenceSendMessageException;
+  static native int toxConferenceJoin(int instanceNumber, int friendNumber, byte[] cookie) throws ToxConferenceJoinException;
+  static native boolean toxConferenceSendMessage(int instanceNumber, int conferenceNumber, int type, int timeDelta, byte[] message) throws ToxConferenceSendMessageException;
 
   static native void invokeSelfConnectionStatus(int instanceNumber, int connectionStatus);
   static native void invokeFileRecvControl(int instanceNumber, int friendNumber, int fileNumber, int control);

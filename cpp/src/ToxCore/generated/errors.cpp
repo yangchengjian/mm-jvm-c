@@ -257,6 +257,18 @@ HANDLE ("ConferenceTitle", CONFERENCE_TITLE)
   return unhandled ();
 }
 
+HANDLE ("ConferencePeerQuery", CONFERENCE_PEER_QUERY)
+{
+  switch (error)
+    {
+    success_case (CONFERENCE_PEER_QUERY);
+    failure_case (CONFERENCE_PEER_QUERY, CONFERENCE_NOT_FOUND);
+    failure_case (CONFERENCE_PEER_QUERY, PEER_NOT_FOUND);
+    failure_case (CONFERENCE_PEER_QUERY, NO_CONNECTION);
+    }
+  return unhandled ();
+}
+
 HANDLE ("ConferenceInvite", CONFERENCE_INVITE)
 {
   switch (error)

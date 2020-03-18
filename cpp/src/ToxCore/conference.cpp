@@ -66,6 +66,20 @@ TOX_METHOD (void, ConferenceSetTitle,
 
 /*
  * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferenceGetTitleSize
+ * Signature: (IIII[B)I
+ */
+TOX_METHOD (jint, ConferenceGetTitleSize,
+  jint instanceNumber, jint conferenceNumber)
+{
+  return instances.with_instance_err (env, instanceNumber,
+    identity,
+    tox_conference_get_title_size, conferenceNumber
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
  * Method:    toxConferenceGetTitle
  * Signature: (II)[B
  */
@@ -84,15 +98,47 @@ TOX_METHOD (jbyteArray, ConferenceGetTitle,
 
 /*
  * Class:     im_tox_tox4j_impl_ToxCoreJni
- * Method:    toxConferenceGetTitleSize
+ * Method:    toxConferencePeerGetNameSize
  * Signature: (IIII[B)I
  */
-TOX_METHOD (jint, ConferenceGetTitleSize,
+TOX_METHOD (jint, ConferencePeerGetNameSize,
+  jint instanceNumber, jint conferenceNumber, jint peerNumber)
+{
+  return instances.with_instance_err (env, instanceNumber,
+    identity,
+    tox_conference_peer_get_name_size, conferenceNumber, peerNumber
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferencePeerGetName
+ * Signature: (II)[B
+ */
+TOX_METHOD (jbyteArray, ConferencePeerGetName,
+  jint instanceNumber, jint conferenceNumber, jint peerNumber)
+{
+  uint8_t name[TOX_MAX_NAME_LENGTH];
+  return instances.with_instance_err (env, instanceNumber,
+    [&] (bool)
+      {
+        return toJavaArray (env, name);
+      },
+    tox_conference_peer_get_name, conferenceNumber, peerNumber, name
+  );
+}
+
+/*
+ * Class:     im_tox_tox4j_impl_ToxCoreJni
+ * Method:    toxConferencePeerCount
+ * Signature: (I[B[B)I
+ */
+TOX_METHOD (jint, ConferencePeerCount,
   jint instanceNumber, jint conferenceNumber)
 {
   return instances.with_instance_err (env, instanceNumber,
     identity,
-    tox_conference_get_title_size, conferenceNumber
+    tox_conference_peer_count, conferenceNumber
   );
 }
 
